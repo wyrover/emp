@@ -1,0 +1,52 @@
+body{
+  background-color:#f9f9f9;
+  color:#696969;
+  font-family: 'Microsoft YaHei', 'SimSun';
+  position:relative;}
+
+body, html{
+  overflow-x:hidden;
+  height:100%;
+  margin-bottom:50px;
+}
+
+strong, b{
+  font-weight:700;}
+
+
+.transit{
+  transition: all 0.5s;
+  -moz-transition: all 0.5s; 
+  -webkit-transition: all 0.5s; 
+  -o-transition: all 0.5s;}
+
+
+a:focus{
+  outline:none;}
+
+a:hover{
+  text-decoration:none;}
+
+
+.responsive{
+    width: 100% \9;
+    max-width: 100%;
+    height: auto;
+}
+
+.zoomout {
+  
+  transition: font-size 0.2s ease 0s;
+  text-align:center;
+}
+  
+.zoomout:hover {
+  font-size:20px;}
+
+  .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}

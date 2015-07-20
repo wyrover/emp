@@ -1,0 +1,267 @@
+
+/*****************************
+Left Panel (aside navigation)
+*****************************/
+
+aside.left-panel{
+  background-color:#262E4A;
+  width:180px;
+  position:fixed;
+  padding:25px 0px;
+  box-shadow:inset -5px 0px 8px rgba(0,0,0,0.3);
+  height:100%;
+  top:0px;
+  left:0px;}
+  
+aside.left-panel.collapsed{
+  overflow:visible !important;
+  // position:absolute;
+  bottom:0px;
+  z-index: 88
+}
+
+
+/*** Aside sizes ***/
+  
+aside.left-panel.lg{
+  width:190px;}
+  
+aside.left-panel.lg + .content{
+  margin-left:190px;}
+  
+
+
+
+/*** Aside Collapsed ***/
+@media (min-width: 768px) {
+aside.left-panel.collapsed{
+  width:75px;
+  text-align:center;}
+  
+aside.left-panel.collapsed + .content{
+
+  margin-left:75px;}
+
+aside.left-panel.collapsed .user .user-login,
+aside.left-panel.collapsed span.nav-label{
+  display:none;}
+  
+
+aside.left-panel.collapsed .navigation > ul > li > a{
+  padding:20px;}
+
+
+  
+aside.left-panel.collapsed i.fa{
+  font-size:22px;}
+  
+aside.left-panel.collapsed .navigation > ul > li.has-submenu:after{
+  display:none;}
+}
+
+.current-time{
+    color: #b8b8b8;
+}
+
+/*****************************
+User
+*****************************/
+
+.user{
+  margin-bottom:35px;}
+  
+.user h4.user-name{
+  color:#8e909a;
+  font-size:16px;}
+  
+.user img{
+  border:1px solid #383c4a;
+  padding:8px;
+  width:70px;}  
+
+.user .user-login{
+  display:inline-block;}
+
+.user .user-login .btn{
+  border:1px solid #343847;
+  background-color:transparent;
+  color:#616574;
+  padding:4px 8px;}
+  
+.user-login .dropdown-menu{
+  border:1px solid #343847;
+  color:#616574;
+  background-color:#2B2F3E;
+  width:100%;
+  margin-top:-1px;
+  min-width:100%;
+  border-radius:0px 0px 4px 4px;
+  border-top:0px;}  
+  
+.user-login .dropdown-menu li a{
+  font-size:12px;
+  color:#616574;
+  padding:4px 8px;}
+  
+.user-login .dropdown-menu li a:hover,
+.user-login .dropdown-menu li a:focus{
+  background-color:#616574;
+  color:#fff;}
+  
+.user .user-login .status-icon{
+  font-size:6px;
+  line-height:0px;
+  margin-right:2px;
+  position:relative;
+  bottom:2px;}
+  
+.user .user-login .status-icon.available{
+  color:#27c7bc;}
+
+.user .user-login .status-icon.busy{
+  color:#EC971F;}
+  
+.user .user-login .status-icon.invisibled{
+  color:#4a4e5d;}
+  
+.user .user-login .status-icon.signout{
+  color:#FF404B;}
+
+
+
+
+/*****************************
+Navigation
+*****************************/
+
+.navigation{
+  margin:20px 0px;}
+  
+.navigation > ul > li{
+  position:relative;
+  text-align:center;
+}
+  
+
+.navigation > ul > li.has-submenu:after{
+  content:"\f105";
+  font-family: 'FontAwesome';
+  display:inline-block;
+  position:absolute;
+  color:#7a7e8a;
+  right:15px;
+  transition: all 0.4s;
+  -moz-transition: all 0.4s; 
+  -webkit-transition: all 0.4s; 
+  -o-transition: all 0.4s;
+  top:10px;
+  visibility:hidden;}
+  
+.navigation > ul > li.active.has-submenu:after,
+.navigation > ul > li.has-submenu:hover:after{
+  color:#fff;}
+  
+
+
+.navigation > ul > li > a{
+  display:block;
+  padding:12px 25px;
+  color:#d0d0d0;
+  text-transform:uppercase;
+  font-size:16px;
+  text-decoration:none;
+  font-weight:100;
+  border-bottom:1px dashed #4C3E13;
+  transition: all 0.4s;
+  -moz-transition: all 0.4s; 
+  -webkit-transition: all 0.4s; 
+  -o-transition: all 0.4s;}
+  
+.navigation > ul:hover > li.active > a{
+  background-color:transparent;
+  box-shadow:none;
+  color:#7a7e8a;}
+  
+.navigation > ul > li:hover > a,
+.navigation > ul > li.active:hover > a,
+.navigation > ul > li.active > a{
+  color:#fff;
+  background-color: #ff404b;
+  -webkit-box-shadow: inset -6px 0 8px -2px rgba(0,0,0,0.3);
+            box-shadow: inset -6px 0 8px -2px rgba(0,0,0,0.3);}
+  
+.navigation ul li a i{
+  margin-right:12px;
+  font-size:16px;}
+
+
+
+/*** Sub Menu ***/
+.navigation ul li ul{
+  display:none;
+  background-color:#1C2133;
+  -webkit-box-shadow: inset -6px 0 8px -2px rgba(0,0,0,0.2);
+            box-shadow: inset -6px 0 8px -2px rgba(0,0,0,0.2);}
+
+    
+aside:not(.collapsed) .navigation ul li.active ul{
+  display:block;}
+  
+.navigation ul li ul li a{
+  padding:8px 25px;
+  color:#D3D6E4;
+  text-decoration:none;
+  white-space:nowrap;
+  transition: all 0.2s;
+  -moz-transition: all 0.2s; 
+  -webkit-transition: all 0.2s; 
+  -o-transition: all 0.2s;
+  font-size:13px;
+  border-left:0px solid #5e6271;
+  text-align:left;
+  display:block;}
+  
+.navigation ul li ul li a:hover,
+.navigation ul li ul li.active a{
+  border-left:5px solid #9F7643;
+  background-color:#324755;
+  color:#D3D6E4;}
+
+
+
+
+/*** Aside Collapsed Sub Menu ***/
+@media (min-width: 768px) {
+aside.left-panel.collapsed .navigation ul li ul{
+  position:absolute;
+  z-index:3;
+  left:100%;
+  top:0px;
+  background-color:#F2F2F4;
+  box-shadow:none;
+  padding:10px 0px;
+  min-width:200px;
+  border:1px solid #dddddd;}
+  
+aside.left-panel.collapsed .navigation ul li ul:before{
+  display:block;
+  content:"";
+  height:20px;
+  width:20px;
+  border-color: transparent #F2F2F4 transparent transparent;
+  border-width:10px;
+  border-style:solid;
+  position:absolute;
+  cursor:pointer;
+  right:100%;
+  top:22px;}
+
+aside.left-panel.collapsed .navigation > ul > li:hover > ul{
+  display:block !important;}
+  
+
+aside.left-panel.collapsed .navigation ul li ul li a{
+  border:0px;
+  color:#8f8f9f;
+  border-bottom:1px dashed #ECECEE;}
+}
