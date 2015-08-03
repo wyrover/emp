@@ -52,8 +52,6 @@ class LocaleApi extends Controller
             ];
         });
 
-
-
         /**
          * 初始情况读取office数据表中的第一条ID记录
          */
@@ -75,17 +73,30 @@ class LocaleApi extends Controller
             $per_page = 15;
         }
 
+
+        $query_all = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
+        $positions = collect($query_all)->map(function($item){
+            return $item['position']['name'];
+        });
+        $position_statistic = array_count_values($positions->toArray());
+        $companies = collect($query_all)->map(function($item){
+            return $item['company']['name'];
+        });
+        $company_statistic = array_count_values($companies->toArray());
+
         if($per_page == 'all') {
-            $query = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
+
             $data = \Response::json([
-                'total' => $query->count(),
-                'per_page'=>$query->count(),
+                'total' => $query_all->count(),
+                'per_page'=>$query_all->count(),
                 'current_page'=>1,
                 'last_page'=>1,
                 'from'=>1,
-                'to'=>$query->count(),
+                'to'=>$query_all->count(),
                 'offices' => $office_list,
-                'data' => $query->toArray()
+                'positions' => $position_statistic,
+                'companies' => $company_statistic,
+                'data' => $query_all->toArray()
             ], 200);
 
         }
@@ -102,10 +113,14 @@ class LocaleApi extends Controller
                 'from' => $query->firstItem(),
                 'to' => $query->lastItem(),
                 'offices' => $office_list,
+                'positions' => $position_statistic,
+                'companies' => $company_statistic,
                 'data' => $query->items()
             ], 200);
         }
         return $data;
+
+
 
     }
 

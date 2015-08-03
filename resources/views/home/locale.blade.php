@@ -1,10 +1,9 @@
 @extends('master')
 @section('content')
     @inject('btn','App\Estar\Composers\Estar')
-
 <div class="row">
     <div class="col-sm-4">
-        <a href="" class="btn btn-danger btn-block">Compose</a>
+        <a href="" class="btn btn-danger btn-block">修改(TODO)</a>
         <hr class="clean">
         <div class="panel panel-default">
             <div class="panel-heading clean">现场列表</div>
@@ -16,11 +15,17 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading clean">
-                统计数据
+                统计数据(会换成饼状图)
             </div>
 
             <div class="panel-body" >
-                共有员工@{{ total }}名
+                该现场有员工@{{ total }}名
+               <ul>
+                   <li v-repeat="positions">@{{ $key }}:@{{ $value }}名</li>
+               </ul>
+                <ul>
+                    <li v-repeat="companies">@{{ $key }}:@{{ $value }}名</li>
+                </ul>
             </div>
 
         </div>
@@ -61,14 +66,12 @@
                 <table class="table table-striped table-hover" id="datatable">
                     <thead>
                     <tr>
-                        <th class="{{$btn->showAtLeastEditor()}}"><label class="cr-styled" ><input type="checkbox" v-on = "click:checkAll" id="checkAll"> <i class="fa"></i></label></th>
                         <th v-repeat="column:columns" id="@{{ ids[$index] }}" class="@{{ column.class }}"><a href="javascript:void(0)" v-on="click:sortBy">@{{column.header}}</a></th>
                         <th class="{{$btn->showAtLeastEditor()}}">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-repeat="data | filterBy keyword | orderBy sortKey reverse">
-                        <td class="{{$btn->showAtLeastEditor()}}"><label class="cr-styled"><input name="ids[]" type="checkbox" v-on="click:buttonState()" value=@{{id}}> <i class="fa"></i></label></td>
                         <td><a class="label label-primary" href="{{url('employee/show')}}/@{{ id }}">@{{ name }}</a></td>
                         <td><a class="label label-warning" href="{{url('job/show')}}/@{{ position.id }}">@{{ position.name }}</a></td>
                         <td><a class="label label-success" href="{{url('company/show')}}/@{{ company.id }}">@{{ company.name }}</a></td>
@@ -84,7 +87,7 @@
                 </div>
                 <hr>
                 <div class="row" style="margin-bottom: 2em">
-                    <div class="col-md-6" v-class="hidden:perpage=='all'">
+                    <div class="col-md-12" v-class="hidden:perpage=='all'">
                         <div class="dataTables_paginate paging_simple_numbers">
                             <ul class="pagination no-margin pull-right">
                                 <li class="paginate_button" v-class="hidden:currentPage==1"><a href="javascript:void(0)" v-on = "click:getData(1)">首页</a></li>

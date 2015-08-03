@@ -53,6 +53,8 @@ var vm = new Vue({
           this.$http.get(baseURL+"/api/v1/locale?locale=" + this.current_office + "&page=" + page +"&perpage="+this.perpage,function(data){
               this.$set("user_level",data["user_level"]);
               this.$set("offices",data["offices"]);
+              this.$set("positions",data["positions"]);
+              this.$set("companies",data["companies"]);
             this.$set("data",data["data"]);
             this.$set("total",data["total"]);
             this.$set("from",data["from"]);
@@ -60,7 +62,6 @@ var vm = new Vue({
             this.$set("perPage",data["per_page"]);
             this.$set("currentPage",data["current_page"]);
             this.$set("lastPage",data["last_page"]);
-              $('.loading-container').fadeIn(300);
           }).success(function(){
               removeLoading();
             $("#checkAll").prop("checked",false);
