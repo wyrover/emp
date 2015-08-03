@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Employee;
+use App\Estar\Eloquent\RepoCompany;
 use App\Estar\Eloquent\RepoOffice;
+use App\Estar\Eloquent\RepoPosition;
 use App\Office;
 use App\Position;
 use App\Company;
@@ -21,11 +23,13 @@ class LocaleApi extends Controller
 {
     private  $employeeRepo;
     private  $officeRepo;
-    public function __construct(RepoEmployee $employeeRepo,RepoOffice $officeRepo)
+    public function __construct(RepoEmployee $employeeRepo,RepoOffice $officeRepo,RepoPosition $positionRepo,RepoCompany $companyRepo)
     {
         $this->middleware('auth');
         $this->employeeRepo = $employeeRepo;
         $this->officeRepo = $officeRepo;
+        $this->positionRepo = $positionRepo;
+        $this->companyRepo = $companyRepo;
     }
 
     /**
@@ -40,13 +44,15 @@ class LocaleApi extends Controller
          * 获取办公地点数据,并构建json
          */
         $offices = $this->officeRepo->all(['id','name']);
-        $office_ids = $offices->map(function($item){
+        $office_list = $offices->map(function($item){
             return [
                 'id' => $item->id,
                 'name'=>$item->name,
                 'employee_counts' => $this->employeeRepo->countBy('office_id',$item->id),
             ];
         });
+
+
 
         /**
          * 初始情况读取office数据表中的第一条ID记录
@@ -55,61 +61,52 @@ class LocaleApi extends Controller
         /**
          * 获取从客户端传过来的request
          */
-//        if (isset($_GET['locale']) && !empty($_GET['locale']))
-//        {
-//            $office_id = $_GET['locale'];
-//        }else{
-//            $office_id = $init_id;
-//        }
-//        if (isset($_GET['perpage']) && !empty($_GET['perpage']))
-//        {
-//            $per_page = $_GET['perpage'];
-//        }
-//        else{
-//            $per_page = 15;
-//        }
-//
-//        if($per_page == 'all') {
-//            $query = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
-//            $data = \Response::json([
-//                'total' => $query->count(),
-//                'per_page'=>$query->count(),
-//                'current_page'=>1,
-//                'last_page'=>1,
-//                'from'=>1,
-//                'to'=>$query->count(),
-//                'data' => $query->toArray()
-//            ], 200);
-//
-//        }
-//        else
-//        {
-//            $query = $this->employeeRepo->findByWithRelationPaginate('office_id',$office_id,['position','company'],$per_page);
-//            $data = \Response::json([
-//                'total' => $query->total(),
-//                'per_page' => $query->perPage(),
-//                'current_page' => $query->currentPage(),
-//                'last_page' => $query->lastPage(),
-//                'next_page_url' => $query->nextPageUrl(),
-//                'prev_page_url' => $query->previousPageUrl(),
-//                'from' => $query->firstItem(),
-//                'to' => $query->lastItem(),
-//                'offices' => $office_ids,
-//                'data' => $query->items()
-//            ], 200);
-//        }
-//        return $data;
-        $query = $this->employeeRepo->findByWithRelation('office_id',1,['position','company']);
+        if (isset($_GET['locale']) && !empty($_GET['locale']))
+        {
+            $office_id = $_GET['locale'];
+        }else{
+            $office_id = $init_id;
+        }
+        if (isset($_GET['perpage']) && !empty($_GET['perpage']))
+        {
+            $per_page = $_GET['perpage'];
+        }
+        else{
+            $per_page = 15;
+        }
 
-        $position = $query->map(function($item){
-            return [
-                'counts'=> $item['position']
-            ];
-        });
+        if($per_page == 'all') {
+            $query = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
+            $data = \Response::json([
+                'total' => $query->count(),
+                'per_page'=>$query->count(),
+                'current_page'=>1,
+                'last_page'=>1,
+                'from'=>1,
+                'to'=>$query->count(),
+                'offices' => $office_list,
+                'data' => $query->toArray()
+            ], 200);
 
-//        $data = $position->unique()->values()->all();
+        }
+        else
+        {
+            $query = $this->employeeRepo->findByWithRelationPaginate('office_id',$office_id,['position','company'],$per_page);
+            $data = \Response::json([
+                'total' => $query->total(),
+                'per_page' => $query->perPage(),
+                'current_page' => $query->currentPage(),
+                'last_page' => $query->lastPage(),
+                'next_page_url' => $query->nextPageUrl(),
+                'prev_page_url' => $query->previousPageUrl(),
+                'from' => $query->firstItem(),
+                'to' => $query->lastItem(),
+                'offices' => $office_ids,
+                'data' => $query->items()
+            ], 200);
+        }
+        return $data;
 
-        return $position;
     }
 
     /**

@@ -17,12 +17,6 @@ class Employee extends Model
     }
 
 
-    public function job()
-    {
-        return $this->belongsTo('App\Job')->select(['id','name']);
-    }
-
-
     public function office()
     {
         return $this->belongsTo('App\Office')->select(['id','name']);
