@@ -14,12 +14,14 @@ use App\VisaHandle;
 use App\VisaType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeApi extends Controller
 {
     private  $employeeRepo;
     public function __construct(RepoEmployee $employeeRepo)
     {
+        $this->middleware('auth');
         $this->employeeRepo = $employeeRepo;
     }
 
@@ -118,8 +120,12 @@ class EmployeeApi extends Controller
      */
     public function store()
     {
+        if(Auth::user()->level()<2){
+            return '权限不够';
+        }
         $input = \Request::all();
-        $this->employeeRepo->create($input);
+        $data = $this->employeeRepo->create($input);
+        return $data->id;
     }
 
     /**
@@ -137,6 +143,7 @@ class EmployeeApi extends Controller
 
         $data = \Response::json([
             'name'=>$employee->name,
+            'id'=>$employee->id,
             'memo'=>$employee->memo,
             'company'=>$employee->company,
             'position'=>$employee->position,
@@ -177,8 +184,10 @@ class EmployeeApi extends Controller
      */
     public function update($id)
     {
+        if(Auth::user()->level()<2){
+            return '权限不够';
+        }
         $input = \Request::all();
-
         $this->employeeRepo->update($input,$id);
     }
 
@@ -190,6 +199,9 @@ class EmployeeApi extends Controller
      */
     public function destroy($data)
     {
+        if(Auth::user()->level()<2){
+            return '权限不够';
+        }
         $ids = explode(',',$data);
         foreach ($ids as $id) {
             $this->employeeRepo->delete($id);

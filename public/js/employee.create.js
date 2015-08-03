@@ -33,13 +33,20 @@ var vm = new Vue({
        fetchAPI: function(){
          this.$http.get(api+'/create',function(data){
            this.$set("data",data);
-       });
+       }).success(function(){
+             removeLoading();
+         });
      },
 
        submit:function(){
            this.fetchForm();
            if (! this.validate()){
-               this.$http.post(api,this.items);
+               this.$http.post(api,this.items).success(
+                   function(data,status,request){
+                       removeLoading();
+                       window.location.href = window.location.origin+'/employee/show/'+request['response'];
+                   }
+               );;
            }
 
        },

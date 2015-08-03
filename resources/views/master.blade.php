@@ -76,65 +76,26 @@
                     </nav>
 
                     <ul class="nav-toolbar">
-                        <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="fa fa-comments-o"></i> <span class="badge bg-warning">7</span></a>
-                            <div class="dropdown-menu md arrow pull-right panel panel-default arrow-top-right messages-dropdown">
+
+                        <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                            <div class="dropdown-menu arrow pull-right  panel panel-default arrow-top-right notifications">
                                 <div class="panel-heading">
-                                    消息
+                                    您好,{{Auth::user()->name}}
                                 </div>
 
                                 <div class="list-group">
-
                                     <a href="#" class="list-group-item">
-                                        <div class="media">
-                                            <div class="user-status busy pull-left">
-                                                <img class="media-object img-circle pull-left" src="" alt="user#1" width="40">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">Lorem ipsum dolor sit consect....</h5>
-                                                <small class="text-muted">23 Sec ago</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <div class="media">
-                                            <div class="user-status offline pull-left">
-                                                <img class="media-object img-circle pull-left" src="" alt="user#1" width="40">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">Nunc elementum, enim vitae</h5>
-                                                <small class="text-muted">23 Sec ago</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <div class="media">
-                                            <div class="user-status invisibled pull-left">
-                                                <img class="media-object img-circle pull-left" src="" alt="user#1" width="40">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">Praesent lacinia, arcu eget</h5>
-                                                <small class="text-muted">23 Sec ago</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <div class="media">
-                                            <div class="user-status online pull-left">
-                                                <img class="media-object img-circle pull-left" src="" alt="user#1" width="40">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">In mollis blandit tempor.</h5>
-                                                <small class="text-muted">23 Sec ago</small>
-                                            </div>
-                                        </div>
+                                        修改个人资料
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-flat btn-block">查看所有消息</a>
-
+                                    <a href="{{url('auth/logout')}}" class="list-group-item">
+                                        退出登录
+                                    </a>
                                 </div>
 
                             </div>
                         </li>
+
                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="fa fa-bell-o"></i><span class="badge">3</span></a>
                             <div class="dropdown-menu arrow pull-right md panel panel-default arrow-top-right notifications">
                                 <div class="panel-heading">
@@ -232,7 +193,7 @@
                     @yield('content')
                 </div>
                 {{--START FOOTER--}}
-                <footer class="container-fluid footer">
+                <footer class="container-fluid footer visible-md visible-lg">
                     版权所有 &copy; 2014-{{date('Y')}} <a href="http://staraw.com/" target="_blank">青岛世达奥科网络技术</a>
                 </footer>
             </section>

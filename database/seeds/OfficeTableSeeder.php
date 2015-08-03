@@ -13,13 +13,16 @@ class OfficeTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create('zh_CN');
-
-        foreach(range(1,10) as $item)
+        $setting = [
+            'delimiter' => '',
+            'accent'    => false,
+        ];
+        foreach(range(1,5) as $item)
         {
             $name = $faker->city();
             App\Office::create([
                 'name' => $name,
-                'pinyin' =>Pinyin::letter($name)
+                'pinyin' =>Pinyin::letter($name,$setting)
             ]);
         }
 

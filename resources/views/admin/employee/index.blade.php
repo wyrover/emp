@@ -36,10 +36,12 @@
 		</div>
 		<hr>
 		<div class="row">
+			@if(Auth::user()->level > 1)
 			<div class="col-md-12 col-sm-12 col-lg-12">
 		    	<button type="button"  class="btn btn-danger" data-toggle="modal" v-attr="disabled:disabled" data-target="#modal"><i class="fa fa-trash"></i> 删除</button>
 				<a id="create" class="btn btn-success" v-on="click:getOption"><i class="fa fa-plus"></i> 新增</a>
 			</div>
+			@endif
 			<div class="col-md-12 table-responsive">
 				<table class="table table-striped table-hover" id="datatable">
 					<thead>

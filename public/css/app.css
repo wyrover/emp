@@ -6,8 +6,7 @@ body {
 
 body, html {
   overflow-x: hidden;
-  height: 100%;
-  margin-bottom: 50px; }
+  height: 100%; }
 
 strong, b {
   font-weight: 700; }
@@ -53,7 +52,7 @@ Loader
 *****************************/
 .loading-container {
   position: fixed;
-  background-color: #f9f9f9;
+  background-color: rgba(12, 5, 40, 0.8);
   z-index: 9;
   top: 0;
   left: 0;
@@ -818,7 +817,10 @@ dd, dt {
   font-weight: 400; }
 
 .table > tbody > tr > td {
-  vertical-align: middle; }
+  vertical-align: middle;
+  line-height: 3em;
+  min-height: 3em;
+  height: 3em; }
 
 /*****************************
  Show page style

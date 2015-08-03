@@ -23,7 +23,7 @@ class EmployeeTableSeeder extends Seeder
             'accent'    => false,
         ];
 
-        foreach(range(1,100) as $item)
+        foreach(range(1,1000) as $item)
         {
             $name = $faker->name();
             App\Employee::create([

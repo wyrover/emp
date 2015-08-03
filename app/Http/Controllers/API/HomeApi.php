@@ -13,12 +13,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeApi extends Controller
 {
     private  $employeeRepo;
     public function __construct(RepoEmployee $repoEmployee,RepoPosition $repoPosition,RepoOffice $repoOffice,RepoCompany $repoCompany)
     {
+        $this->middleware('auth');
         $this->employeeRepo = $repoEmployee;
         $this->positionRepo = $repoPosition;
         $this->officeRepo = $repoOffice;
@@ -56,6 +58,7 @@ class HomeApi extends Controller
 
 
         $data = \Response::json([
+            'user_level'=>Auth::user()->level(),
             'employeeCount' => $employeeCount,
             'ourEmployees' => $ourEmployees,
             'officeCount'=>$officeCount,

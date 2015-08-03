@@ -51,13 +51,20 @@ var vm = new Vue({
             this.$set("passport_deadline",data['passport_deadline']);
             this.$set("visa_deadline",data['visa_deadline']);
             this.$set("land_deadline",data['land_deadline']);
+        }).success(function(){
+            removeLoading();
         })
        },
 
        submit:function(){
            this.fetchForm();
            if (! this.validate()){
-               this.$http.put(my_api,this.items);
+               this.$http.put(my_api,this.items).success(
+                   function(){
+                       removeLoading();
+                       window.location.href = window.location.origin+'/employee/show/'+id;
+                   }
+               );
            }
 
        },

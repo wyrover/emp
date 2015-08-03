@@ -14,6 +14,10 @@ class AdminEmployee extends Controller
      *
      * @return Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('admin.employee.index');

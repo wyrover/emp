@@ -1,7 +1,10 @@
+@inject('btn','App\Estar\Composers\Estar')
 <div class="row"  id="employee">
    <div class="col-lg-9">
       <div class="panel panel-primary">
-         <div class="panel-heading"><h4><i class="fa fa-user"></i> 人员信息卡片</h4> </div>
+         <div class="panel-heading">
+            <h4><i class="fa fa-user"></i> 人员信息卡片</h4>
+         </div>
          <div class=" panel-body">
             <div class="row">
                <div class="col-lg-1 visible-lg hidden-print">
@@ -31,6 +34,7 @@
                      <dt>落地截止:</dt> <dd>@{{ land_deadline }} <span class="badge bg-success">剩@{{ land_deadline_diff }}天</span></dd>
                   </dl>
                </div>
+               <div class="col-md-2 pull-right {{$btn->showAtLeastEditor()}}"><a href="@{{ edit_url }}" class="btn btn-lg btn-success">修改</a></div>
             </div>
          </div>
       </div>
@@ -44,7 +48,7 @@
      </div>
       <h5 class=" text-primary"><i class="fa fa-plus-circle"></i> 相关信息</h5>
       <ul class="tag-list" style="padding: 0">
-         <li><a href=""><i class="fa fa-tag"></i>@{{ company.name }} </a></li>
+         <li><a href="@{{ company_url }}"><i class="fa fa-tag"></i>@{{ company.name }} </a></li>
          <li><a href=""><i class="fa fa-tag"></i> @{{ position.name }}</a></li>
          <li><a href=""><i class="fa fa-tag"></i> @{{ office.name }}</a></li>
          <li><a href=""><i class="fa fa-tag"></i> @{{ visa_type.type }}</a></li>

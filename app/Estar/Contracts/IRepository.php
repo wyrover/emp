@@ -44,6 +44,8 @@ interface IRepository{
 
     public function findBy($attr,$value,$columns = array('*'));
 
+    public function findByWithRelationPaginate($attr,$value,array $withModels,$per_page = 10 ,$columns = array('*'));
+
     public function lists($column = 'id');
 
 

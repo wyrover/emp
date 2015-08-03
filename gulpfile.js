@@ -27,6 +27,7 @@ elixir(function(mix) {
         .scripts("main.js","public/js/main.js")
         .scripts("home.js","public/js/home.js")
         .scripts("employee.public.js","public/js/employee.public.js")
+        .scripts("locale.public.js","public/js/locale.public.js")
         .scripts("employee.show.js","public/js/employee.show.js")
         .scripts("employee.create.js","public/js/employee.create.js")
         .scripts("employee.update.js","public/js/employee.update.js")

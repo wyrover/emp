@@ -16,6 +16,7 @@ var vm = new Vue({
         getData: function(page){
           this.$http.get(baseURL+"/api/v1/employee/"+id,function(data){
               this.$set("name",data["name"]);
+              this.$set("id",data["id"]);
               this.$set("pinyin",data["pinyin"]);
               this.$set("company",data["company"]);
               this.$set("position",data["position"]);
@@ -33,13 +34,18 @@ var vm = new Vue({
               this.$set("visa_handle",data["visa_handle"]);
               this.$set("memo",data["memo"]);
           }).success(function(){
+              removeLoading();
             $("#checkAll").prop("checked",false);
           }).error(function (status) {
             $("#show-error").show();
           });
-        },
-
+        }
        },
+        computed: {
+            edit_url: function () {
+                return window.location.origin+'/admin/employee/'+this.id+'/edit';
+            }
+        }
 
     });
 

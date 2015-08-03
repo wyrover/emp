@@ -8,24 +8,24 @@ namespace App\Estar\Composers;
 
  class Estar {
 
-    protected $urls = [
-        'home'=>['name'=>'人员概况','icon'=>'pie-chart'],
-        'employee'=>['name'=>'人员详情','icon'=>'file-text-o'],
-        'spread'=>['name'=>'人员分布','icon'=>'flag-o'],
-        'locale'=>['name'=>'现场人员','icon'=>'cubes'],
-        'admin'=>[
-            'name'=>'系统设置','icon'=>'cogs',
-            'submenu'=>[
-                'admin/employee'=>'人员管理',
-                'admin/position'=>'岗位管理',
-                'admin/company'=>'所属公司管理',
-                'admin/locale'=>'所在位置管理',
-                'admin/visa'=>'签证管理'
-            ]
-        ]
-    ];
+     protected $urls = [
+         'home'=>['name'=>'人员概况','icon'=>'pie-chart'],
+         'employee'=>['name'=>'人员详情','icon'=>'file-text-o'],
+         'locale'=>['name'=>'现场详情','icon'=>'cubes'],
+         'spread'=>['name'=>'人员分布','icon'=>'flag-o'],
+         'admin'=>[
+             'name'=>'系统设置','icon'=>'cogs',
+             'submenu'=>[
+                 'admin/employee'=>'人员管理',
+                 'admin/position'=>'岗位管理',
+                 'admin/company'=>'所属公司管理',
+                 'admin/locale'=>'所在位置管理',
+                 'admin/visa'=>'签证管理'
+             ]
+         ]
+     ];
 
-    public function showBreadcrumbs()
+     public function showBreadcrumbs()
     {
         $path = \Request::path();
         $pattern = '/^[a-z0-9-]+/';
@@ -68,6 +68,20 @@ public function showTime()
     return date('Y年m月d日 '.$week);
 }
 
+     public function showAtLeastEditor()
+     {
+         if(\Auth::user()->level() > 1){
+             return $show = 'visible';
+         }
+         return $show = 'hidden';
+}
 
+     public function showOnlyAdmin()
+     {
+         if(\Auth::user()->level() < 9){
+             return $show = 'hidden';
+         }
+         return $show = 'visible';
+     }
 
 }

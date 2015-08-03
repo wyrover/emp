@@ -2,11 +2,15 @@
 /********************************
  Preloader
  ********************************/
-$(window).load(function() {
-    $('.loading-container').fadeOut(1000, function() {
-        $(this).remove();
-    });
-});
+
+var addLoading = function(){
+    $('.loading-container').fadeIn(500);
+}
+
+var removeLoading = function(){
+    $('.loading-container').fadeOut(500);
+}
+
 
 /* jshint ignore:start */
 

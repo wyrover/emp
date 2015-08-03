@@ -101,6 +101,16 @@ abstract class EstarRepo implements IRepository{
         return $this->model->where($attr,'=',$value)->first($columns);
     }
 
+    public function findByWithRelation($attr,$value,array $withModels,$columns = array('*'))
+    {
+        return $this->model->where($attr,'=',$value)->with($withModels)->get();
+    }
+
+    public function findByWithRelationPaginate($attr,$value,array $withModels,$per_page = 10 ,$columns = array('*'))
+    {
+        return $this->model->where($attr,'=',$value)->with($withModels)->paginate($per_page);
+    }
+
     public function lists($column = 'id')
     {
         return $this->model->lists($column);

@@ -37,6 +37,7 @@ var vm = new Vue({
         getData:function(){
             this.$http.get(api)
             .success(function(data){
+                    removeLoading();
                 this.employeeCount = data["employeeCount"],
                 this.ourEmployees = data["ourEmployees"],
                 this.officeCount = data["officeCount"],

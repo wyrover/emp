@@ -39,7 +39,7 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading clean">
-        人员分布情况
+        人员分布概况  <a class="badge bg-blue" href="{{url('spread')}}" style="margin-left: 2em">查看详情</a>
           <div class="btn-group pull-right">
           <select class="form-control" v-model="currentChart" v-on="change:chageChart(currentChart)">
               <option value="position">按岗位</option>

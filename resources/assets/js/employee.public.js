@@ -43,11 +43,8 @@ var vm = new Vue({
             {
                 'header':'赴哈时间',
                 'class':'visible-lg'
-            },
-            {
-                'header':'操作',
-                'class':''
             }
+
         ],
         ids:[
             "pinyin","position_id","company_id","office_id","passport","passport_deadline","visa_deadline","reached_at"
@@ -71,7 +68,9 @@ var vm = new Vue({
    },
         //从API获取相应数据
         getData: function(page){
+            addLoading();
           this.$http.get(baseURL+"/api/v1/employee?page="+page+"&perpage="+this.perpage,function(data){
+              this.$set("user_level",data["user_level"]);
             this.$set("data",data["data"]);
             this.$set("total",data["total"]);
             this.$set("from",data["from"]);
@@ -81,6 +80,7 @@ var vm = new Vue({
             this.$set("lastPage",data["last_page"]);
           }).success(function(){
             $("#checkAll").prop("checked",false);
+              removeLoading();
           }).error(function (status) {
             $("#show-error").show();
           });
@@ -88,6 +88,7 @@ var vm = new Vue({
 
         changePerPage:function(param){
           this.perpage =  param;
+            addLoading();
           this.getData();
         },
 
@@ -119,7 +120,9 @@ var vm = new Vue({
         },
 
         doDelete:function(ids){
-          this.$http.delete(baseURL+'/api/v1/employee/'+ids)
+            addLoading();
+          this.$http.delete(baseURL+'/api/v1/employee/'+ids,function(){
+          })
           .success(function(){
             this.getData();
             this.disabled = true;
@@ -142,6 +145,7 @@ var vm = new Vue({
 
           goSearch:function(){
            this.perpage = 'all';
+              addLoading();
            this.getData('all');
          },
          clearInput:function(){
