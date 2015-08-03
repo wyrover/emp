@@ -101,7 +101,7 @@ class LocaleApi extends Controller
                 'prev_page_url' => $query->previousPageUrl(),
                 'from' => $query->firstItem(),
                 'to' => $query->lastItem(),
-                'offices' => $office_ids,
+                'offices' => $office_list,
                 'data' => $query->items()
             ], 200);
         }
