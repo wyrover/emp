@@ -3,7 +3,7 @@
     @inject('btn','App\Estar\Composers\Estar')
 <div class="row">
     <div class="col-sm-4">
-        <a href="" class="btn btn-danger btn-block">修改(TODO)</a>
+        <a href="" class="btn btn-danger btn-block"><i class="fa fa-edit"></i> 修改现场数据</a>
         <hr class="clean">
         <div class="panel panel-default">
             <div class="panel-heading clean">现场列表</div>

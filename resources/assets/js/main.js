@@ -129,26 +129,6 @@ $(function(){
     }
 
 
-    /********************************
-     wysihtml5
-     ********************************/
-    if( $.isFunction($.fn.wysihtml5) ){
-        $('.wysihtml').wysihtml5();
-    }
-
-
-
-    /********************************
-     wysihtml5
-     ********************************/
-    if( $.isFunction($.fn.ckeditor) ){
-        CKEDITOR.disableAutoInline = true;
-        $('#ckeditor').ckeditor();
-        $('.inlineckeditor').ckeditor();
-    }
-
-
-
     Chart.defaults.global = {
         // Boolean - Whether to animate the chart
         animation: true,
@@ -164,7 +144,7 @@ $(function(){
         //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
         //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
         //  easeOutElastic, easeInCubic]
-        animationEasing: "easeOutQuart",
+        animationEasing: "linear",
 
         // Boolean - If we should show the scale at all
         showScale: true,
@@ -198,9 +178,6 @@ $(function(){
         // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
         scaleBeginAtZero: false,
 
-        // String - Scale label font declaration for the scale label
-        scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-
         // Number - Scale label font size in pixels
         scaleFontSize: 12,
 
@@ -228,8 +205,6 @@ $(function(){
         // String - Tooltip background colour
         tooltipFillColor: "rgba(0,0,0,0.8)",
 
-        // String - Tooltip label font declaration for the scale label
-        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
         // Number - Tooltip label font size in pixels
         tooltipFontSize: 14,
@@ -240,8 +215,6 @@ $(function(){
         // String - Tooltip label font colour
         tooltipFontColor: "#fff",
 
-        // String - Tooltip title font declaration for the scale label
-        tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
         // Number - Tooltip title font size in pixels
         tooltipTitleFontSize: 14,
