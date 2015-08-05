@@ -15,8 +15,8 @@ function legend(parent, data, chart, legendTemplate) {
     datas.forEach(function(d, i) {
 
         //span to div: legend appears to all element (color-sample and text-node)
-        var title = document.createElement('div');
-        title.className = 'title';
+        var title = document.createElement('li');
+        title.className = 'legend-label';
         parent.appendChild(title);
 
         var colorSample = document.createElement('div');

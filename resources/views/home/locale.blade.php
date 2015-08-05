@@ -27,7 +27,7 @@
             <div class="panel-body" id="chartBox" >
                 <canvas id="myChart"></canvas>
             </div>
-            <div class="panel-body"  id="legend"></div>
+            <ul class="list-unstyled"  id="legend"></ul>
 
         </div>
     </div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn-group pull-right" style="margin-right: 2em">
+                <div class="btn-group pull-right">
                 </div>
             </div>
         </div>
