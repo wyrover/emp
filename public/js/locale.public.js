@@ -98,10 +98,14 @@ var vm = new Vue({
             $('#chartBox').append('<canvas id="myChart"><canvas>');
         },
 
+
         drawChart:function(){
             this.resetCanvas();
             var ctx = $("#myChart").get(0).getContext("2d");
-            new Chart(ctx).Doughnut(this.chartData);
+           var chart = new Chart(ctx).Doughnut(this.chartData);
+            var data = this.chartData;
+            legend(document.getElementById('legend'),data,chart, "<%=label%>: <%=value%>人");
+
         },
 
         changeLocale:function(e){

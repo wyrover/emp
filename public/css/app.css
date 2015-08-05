@@ -793,7 +793,6 @@ Footer
   padding-bottom: 15px;
   padding-top: 15px;
   bottom: 0;
-  position: fixed;
   width: 100%;
   z-index: 2; }
 
@@ -1244,6 +1243,32 @@ Responsive Stying
     right: 45px; }
   .notifications.arrow.arrow-top-right:before {
     right: 44px; } }
+
+#fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0; }
+
+.legend {
+  padding: 10px; }
+
+.legend .title {
+  display: block;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+  padding: 0 0.3em; }
+
+.legend .color-sample {
+  display: block;
+  float: left;
+  width: 1em;
+  height: 1em;
+  border: 2px solid;
+  /* Comment out if you don't want to show the fillColor */
+  border-radius: 0.5em;
+  /* Comment out if you prefer squarish samples */
+  margin-right: 0.5em; }
 
 .mail-nav .list-group-item {
   border: none;

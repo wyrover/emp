@@ -24,7 +24,7 @@ elixir(function(mix) {
             "datetimepicker.js",
             "bower_components/chosen/chosen.jquery.min.js",
         ], 'public/js/plugin.js')
-        .scripts(["bower_components/chart/chart.js"],"public/js/chart.js")
+        .scripts(["bower_components/chart/chart.js","bower_components/chart/legend.js"],"public/js/chart.js")
         .scripts("main.js","public/js/main.js")
         .scripts("home.js","public/js/home.js")
         .scripts("employee.public.js","public/js/employee.public.js")

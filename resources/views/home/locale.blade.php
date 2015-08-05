@@ -27,6 +27,7 @@
             <div class="panel-body" id="chartBox" >
                 <canvas id="myChart"></canvas>
             </div>
+            <div class="panel-body"  id="legend"></div>
 
         </div>
     </div>
