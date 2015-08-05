@@ -84,7 +84,7 @@ var vm = new Vue({
                 data.push({
                     value : items[k],
                     label : k,
-                    color: randomColor({hue:'random',luminosity: 'dark'}),
+                    color: randomColor({hue:'green',luminosity: 'dark'}),
                     highlight: "#5AD3D1",
                 })
 
