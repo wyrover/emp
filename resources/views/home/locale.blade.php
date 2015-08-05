@@ -15,17 +15,17 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading clean">
-                统计数据(会换成饼状图)
+                统计数据
+                <div class="btn-group pull-right">
+                    <select class="form-control" v-model="currentChart" v-on="change:changeChart(currentChart)">
+                        <option value="positions">按岗位</option>
+                        <option value="companies">按公司</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="panel-body" >
-                该现场有员工@{{ total }}名
-               <ul>
-                   <li v-repeat="positions">@{{ $key }}:@{{ $value }}名</li>
-               </ul>
-                <ul>
-                    <li v-repeat="companies">@{{ $key }}:@{{ $value }}名</li>
-                </ul>
+            <div class="panel-body" id="chartBox" >
+                <canvas id="myChart"></canvas>
             </div>
 
         </div>

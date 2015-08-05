@@ -52,7 +52,7 @@ var vm = new Vue({
             })
         },
 
-        chageChart:function(str){
+        changeChart:function(str){
             var prop = str+"Data";
             this.setChartData(this[prop]);
         },
@@ -65,28 +65,35 @@ var vm = new Vue({
 
             this.chartData = {
                 labels: labels,
-                series: [             
-                counts               
-                ]
+                series: counts
             };
 
             this.drawChart();
         },
 
+        resetCanvas:function(){
+            $('#myChart').remove(); // this is my <canvas> element
+            $('#chartBox').append('<canvas id="myChart"><canvas>');
+        },
+
         drawChart:function(){
 
-            var chart = new Chartist.Bar('.ct-chart',this.chartData,{
-                fullWidth:true,
-                axisY: {
-                    onlyInteger: true
-                },
-                axisX: {
-                    showGrid: false
-                },
-                plugins:[
-                Chartist.plugins.tooltip()
+            this.resetCanvas();
+            var ctx = $("#myChart").get(0).getContext("2d");
+
+            var data = {
+                labels: this.chartData.labels,
+                datasets: [
+                    {
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: this.chartData.series
+                    }
                 ]
-            });
+            };
+            var myBarChart = new Chart(ctx).Bar(data);
 
         },
 

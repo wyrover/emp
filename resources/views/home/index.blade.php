@@ -41,15 +41,15 @@
       <div class="panel-heading clean">
         人员分布概况  <a class="badge bg-blue" href="{{url('spread')}}" style="margin-left: 2em">查看详情</a>
           <div class="btn-group pull-right">
-          <select class="form-control" v-model="currentChart" v-on="change:chageChart(currentChart)">
+          <select class="form-control" v-model="currentChart" v-on="change:changeChart(currentChart)">
               <option value="position">按岗位</option>
               <option value="office">按现场</option>
               <option value="company">按公司</option>
             </select>
           </div>
       </div>
-      <div class="panel-body" >
-        <div class="ct-chart" style="height:320px"></div>
+      <div class="panel-body" id="chartBox">
+        <canvas id="myChart"></canvas>
       </div>
     </div>
 
