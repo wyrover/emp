@@ -13,6 +13,7 @@ var vm = new Vue({
         disabled:true,
         current_office:'1',
         currentChart:'positions',
+        page:'1',
         columns:[
             {
                 'header':'姓名',
@@ -63,8 +64,9 @@ var vm = new Vue({
                 this.$set("perPage",data["per_page"]);
                 this.$set("currentPage",data["current_page"]);
                 this.$set("lastPage",data["last_page"]);
-            }).success(function(data){
+            }).success(function(data,status){
                 removeLoading();
+                console.log(status);
                 this.setChartData(data[this.currentChart]);
             }).error(function (status) {
                 $("#show-error").show();
