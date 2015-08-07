@@ -29,12 +29,11 @@ Route::group(['prefix'=>'api/v1'],function(){
 
 Route::group(['prefix'=>'admin'],function(){
 
-//	Route::resource('employee','Admin\AdminEmployee');
-//	Route::get('position','Admin\AdminPosition@index');
-//	Route::get('office','Admin\AdminOffice@index');
-//	Route::get('company','Admin\AdminCompany@index');
-//	Route::get('visa','Admin\AdminVisa@index');
-	Route::resource('locale','Admin\AdminLocale');
+	Route::resource('employee','Admin\AdminEmployee');
+	Route::get('position','Admin\AdminPosition@index');
+	Route::get('office','Admin\AdminOffice@index');
+	Route::get('company','Admin\AdminCompany@index');
+	Route::get('visa','Admin\AdminVisa@index');
 });
 
 
