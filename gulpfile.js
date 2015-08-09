@@ -23,6 +23,7 @@ elixir(function(mix) {
             "moment.js",
             "datetimepicker.js",
             "bower_components/chosen/chosen.jquery.min.js",
+            "bower_components/starPop.js",
         ], 'public/js/plugin.js')
         .scripts(["bower_components/chart/chart.js","bower_components/chart/legend.js"],"public/js/chart.js")
         .scripts("main.js","public/js/main.js")

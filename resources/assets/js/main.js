@@ -9,21 +9,16 @@ var addLoading = function(){
 
 var removeLoading = function(){
     $('.loading-container').fadeOut(500);
-}
+};
 
 
 /* jshint ignore:start */
 
 
 $(function(){
-
-
     /*$('.dropdown-menu').click(function(event){
      event.stopPropagation();
      });*/
-
-
-
 
     /********************************
      Toggle Aside Menu
@@ -39,6 +34,12 @@ $(function(){
     $('a[href="'+url+'"]').parent('li').addClass('active');
 
 
+    /********************************
+     提示框
+     ********************************/
+    StarPop.init({
+        "selector": ".star-alert"
+    });
 
     /********************************
      Aside Navigation Menu
@@ -109,7 +110,6 @@ $(function(){
             cursorborderradius : '0px'
         });
     }
-
 
 
     /********************************

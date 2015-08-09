@@ -13,6 +13,8 @@ var vm = new Vue({
         disabled:true,
         current_office:'1',
         currentChart:'positions',
+        newLocale:'',
+        offices:[],
         columns:[
             {
                 'header':'姓名',
@@ -69,6 +71,10 @@ var vm = new Vue({
             }).error(function (status) {
                 $("#show-error").show();
             });
+        },
+
+        insertData:function($data){
+
         },
 
         changeChart:function(str){
@@ -156,9 +162,22 @@ var vm = new Vue({
         },
         clearInput:function(){
             this.$$.input.value = '';
+        },
+        editLocale:function(e){
+            var onKey = $(e.target).parent().attr('data-id');
+            console.log(onKey);
+        },
+        addLocale:function(){
+            bootbox.prompt("请输入新的现场名称", function(result) {
+                if (result === null) {
+                    StarPop.show("操作取消");
+                } else {
+                  StarPop.show(baseURL);
+                }
+            });
         }
-    },
 
+    },
 
     computed:{
         pagers:{

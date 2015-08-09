@@ -189,7 +189,7 @@ class LocaleApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $data = $this->employeeRepo->create($input);
+        $data = $this->officeRepo->create($input);
         return $data->id;
     }
 

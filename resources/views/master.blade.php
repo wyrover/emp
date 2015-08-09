@@ -25,6 +25,11 @@
     </div>
 </div>
 
+{{--提示框--}}
+<div class="star-alert alert alert-success" role="alert" style="display:none;">
+    <span>我会被自动调用</span>
+</div>
+
        {{--START SIDEBAR--}}
 @inject('menu','App\Estar\Composers\Estar')
 <aside class="left-panel">

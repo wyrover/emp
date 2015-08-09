@@ -3,19 +3,35 @@
     @inject('btn','App\Estar\Composers\Estar')
 <div class="row">
     <div class="col-sm-4">
-        <a href="" class="btn btn-danger btn-block"><i class="fa fa-edit"></i> 修改现场数据</a>
+        <button  class="btn btn-success btn-block" v-on="click:addLocale"><i class="fa fa-plus"></i> 添加数据</button>
         <hr class="clean">
         <div class="panel panel-default">
             <div class="panel-heading clean">现场列表</div>
             <div class="panel-body nopadd">
-                <div class="list-group no-margn mail-nav">
-                    <a  id="@{{ id }}" v-on="click:changeLocale" v-class="on:id==current_office" v-repeat="offices" href="javascript:void (0)" class="list-group-item"><span class="badge bg-blue text-white">@{{ employee_counts }}</span>@{{ name }}</a>
+                <div class="row">
+                    <div class="col-xs-12 table-responsive">
+                        <table class="table table-striped table-hover">
+                            <tbody>
+                            <tr v-repeat="offices" >
+                                <td><a id="@{{ id }}"  v-class="on:id==current_office" class="label label-success" v-on="click:changeLocale"  href="javascript:void (0)">@{{ name }}</a>
+                                </td>
+                                <td><span class="badge bg-gray text-white">@{{ employee_counts }}人</span></td>
+                                <td  class="{{$btn->showAtLeastEditor()}}">
+                                    <div class="btn-group btn-group-xs pull-right">
+                                        <a data-id ="@{{ id }}" class="btn btn-default" v-on="click:editLocale"><i class="fa fa-edit"></i></a>
+                                        <a  class="btn btn-default"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading clean">
-                统计数据
+                统计数据： @{{ offices[parseInt(this.current_office)-1].name }}
                 <div class="btn-group pull-right">
                     <select class="form-control" v-model="currentChart" v-on="change:changeChart(currentChart)">
                         <option value="positions">按岗位</option>
@@ -106,7 +122,7 @@
         </div>
     </div>
 </div>
-
+@include('partials._modal')
 @section('scripts')
     @parent
     <script src="/js/chart.js"></script>
