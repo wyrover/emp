@@ -1,6 +1,11 @@
 "use strict";
 Vue.http.headers.common["X-CSRF-TOKEN"] = document.querySelector("#token").getAttribute("value");
 var baseURL =  'http://'+window.location.host ;
+var id = window.location.href.split('#')[1];
+if( typeof id === 'undefined'){
+    id = 1;
+}
+var api = 'http://'+window.location.host + '/api/v1/locale/';
 var vm = new Vue({
     el: "#app",
     data: {
@@ -11,10 +16,13 @@ var vm = new Vue({
         pagersCount:5,//显示的pager数量
         perpage:15,
         disabled:true,
-        current_office:'1',
+        current_office:id,
         currentChart:'positions',
         newLocale:'',
         offices:[],
+        editable:true,
+        remove_id:'',
+        edit_id:'',
         columns:[
             {
                 'header':'姓名',
@@ -71,10 +79,6 @@ var vm = new Vue({
             }).error(function (status) {
                 $("#show-error").show();
             });
-        },
-
-        insertData:function($data){
-
         },
 
         changeChart:function(str){
@@ -163,19 +167,71 @@ var vm = new Vue({
         clearInput:function(){
             this.$$.input.value = '';
         },
-        editLocale:function(e){
-            var onKey = $(e.target).parent().attr('data-id');
-            console.log(onKey);
+        editLocale:function(locale){
+           this.removeLocale(locale);
+            this.editable = false;
+            $('#updateEle').fadeIn();
+            $('#updateInput').val(locale.name);
+            this.edit_id = locale.id;
         },
-        addLocale:function(){
-            bootbox.prompt("请输入新的现场名称", function(result) {
-                if (result === null) {
-                    StarPop.show("操作取消");
-                } else {
-                  StarPop.show(baseURL);
+        updateLocale:function(){
+            var input = $('#updateInput').val();
+            var data = {
+                name: input
+            };
+
+            if (input !==''){
+                this.$http.put(api+this.edit_id,data,function(){
+                    $('#updateEle').fadeOut();
+                    this.getData();
+                }).error(function(){
+                    StarPop.show('操作不成功！请检查网络连接，或重新登录')
+                });
+            };
+            this.editable = true;
+        },
+        addNew:function(){
+            $('#addNewEle').fadeIn();
+        },
+        removeLocale:function(office){
+            this.offices.$remove(office);
+        },
+        saveNew:function(){
+            var input = {
+                name:$('#addNew').val()
+            };
+
+            if (! this.validate()){
+                this.$http.post(api,input,function(){
+                    $('#addNewEle').fadeOut();
+                    $('#addNew').val('');
+                    this.getData();
+                }).error(function(){
+                    StarPop.show('操作不成功！请检查网络连接，或重新登录')
+                });
+            }
+        },
+        setRemoveId:function(e){
+            var remove_id = $(e.target).closest("a").attr('data-id');
+            $('#btn_delete').attr('data-id',remove_id); //把modal中的删除按钮赋值
+        },
+        removeData:function(e){
+            addLoading();
+            var remove_id = $(e.target).closest("a").attr('data-id');
+            this.$http.delete(api+remove_id )
+                .success(function(){
+                    this.getData();
+                    console.log(this.remove_id);
+                    $("#modal").modal("hide");
+                });
+        },
+        validate:function(){
+            var has_err = false;
+                if($('#addNew').val() == ''){
+                    has_err = true;
                 }
-            });
-        }
+            return has_err;
+        },
 
     },
 

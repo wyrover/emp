@@ -42,7 +42,7 @@ Route::get('employee','EmployeeController@index');
 Route::get('employee/show/{id}','EmployeeController@show');
 
 
-Route::get('spread','SpreadController@index');
+//Route::get('spread','SpreadController@index');
 Route::get('locale','LocaleController@index');
 
 

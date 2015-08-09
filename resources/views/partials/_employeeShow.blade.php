@@ -49,8 +49,8 @@
       <h5 class=" text-primary"><i class="fa fa-plus-circle"></i> 相关信息</h5>
       <ul class="tag-list" style="padding: 0">
          <li><a href="@{{ company_url }}"><i class="fa fa-tag"></i>@{{ company.name }} </a></li>
-         <li><a href=""><i class="fa fa-tag"></i> @{{ position.name }}</a></li>
-         <li><a href=""><i class="fa fa-tag"></i> @{{ office.name }}</a></li>
+         <li><a href="{{url('locale')}}#@{{ office.id }}"><i class="fa fa-tag"></i> @{{ position.name }}</a></li>
+         <li><a href="{{url('locale')}}#@{{ office.id }}"><i class="fa fa-tag"></i> @{{ office.name }}</a></li>
          <li><a href=""><i class="fa fa-tag"></i> @{{ visa_type.type }}</a></li>
          <li><a href=""><i class="fa fa-tag"></i> @{{ visa_handle.method }}</a></li>
       </ul>

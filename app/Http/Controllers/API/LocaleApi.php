@@ -253,7 +253,7 @@ class LocaleApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $this->employeeRepo->update($input,$id);
+        $this->officeRepo->update($input,$id);
     }
 
     /**
@@ -262,15 +262,14 @@ class LocaleApi extends Controller
      * @param  int  $data
      * @return Response
      */
-    public function destroy($data)
+    public function destroy($id)
     {
         if(Auth::user()->level()<2){
             return '权限不够';
         }
-        $ids = explode(',',$data);
-        foreach ($ids as $id) {
-            $this->employeeRepo->delete($id);
-        }
+
+            $this->officeRepo->delete($id);
+
 
     }
 

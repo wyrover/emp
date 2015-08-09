@@ -55,7 +55,7 @@
 							<td><a class="label label-primary" href="{{url('employee/show')}}/@{{ id }}">@{{ name }}</a></td>
 							<td><a class="label label-warning" href="{{url('job/show')}}/@{{ position.id }}">@{{ position.name }}</a></td>
 							<td><a class="label label-success" href="{{url('company/show')}}/@{{ company.id }}">@{{ company.name }}</a></td>
-							<td><a class="label label-info" href="{{url('office/show')}}/@{{ office.id }}">@{{ office.name }}</a></td>
+							<td><a class="label label-info" href="{{url('locale')}}#@{{ office.id }}">@{{ office.name }}</a></td>
 							<td>@{{passport}}</td>
 							<td class="visible-lg">@{{passport_deadline}}</td>
 							<td class="visible-lg">@{{visa_deadline}}</td>

@@ -3,23 +3,35 @@
     @inject('btn','App\Estar\Composers\Estar')
 <div class="row">
     <div class="col-sm-4">
-        <button  class="btn btn-success btn-block" v-on="click:addLocale"><i class="fa fa-plus"></i> 添加数据</button>
-        <hr class="clean">
         <div class="panel panel-default">
-            <div class="panel-heading clean">现场列表</div>
+            <div class="panel-heading clean">现场列表
+                <span class="pull-right"><button type="button" class="btn btn-danger btn-xs" v-on="click:addNew"><i class="fa fa-plus"></i> 添加数据</button></span>
+            </div>
             <div class="panel-body nopadd">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-striped table-hover">
                             <tbody>
-                            <tr v-repeat="offices" >
-                                <td><a id="@{{ id }}"  v-class="on:id==current_office" class="label label-success" v-on="click:changeLocale"  href="javascript:void (0)">@{{ name }}</a>
+                                <div class="input-group" style="display: none" id="addNewEle">
+                                    <input type="text" class="form-control" id="addNew" placeholder="请输入内容">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" v-on="click:saveNew()">保存</button>
+                                          </span>
+                                </div>
+                                <div class="input-group" style="display: none" id="updateEle">
+                                    <input type="text" class="form-control" id="updateInput" placeholder="请输入内容">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" v-on="click:updateLocale()">更新</button>
+                                          </span>
+                                </div>
+                            <tr v-repeat="office:offices" >
+                                <td><a id="@{{ office.id }}"  v-class="on:id==current_office" class="label label-success" v-on="click:changeLocale"  href="javascript:void (0)">@{{ office.name }}</a>
                                 </td>
-                                <td><span class="badge bg-gray text-white">@{{ employee_counts }}人</span></td>
+                                <td><span class="badge bg-gray text-white">@{{ office.employee_counts }}人</span></td>
                                 <td  class="{{$btn->showAtLeastEditor()}}">
                                     <div class="btn-group btn-group-xs pull-right">
-                                        <a data-id ="@{{ id }}" class="btn btn-default" v-on="click:editLocale"><i class="fa fa-edit"></i></a>
-                                        <a  class="btn btn-default"><i class="fa fa-trash"></i></a>
+                                        <a data-id ="@{{ office.id }}" class="btn btn-default" v-class="disabled:editable==false" v-on="click:editLocale(office)"><i class="fa fa-edit"></i></a>
+                                        <a  data-id ="@{{ office.id }}"  class="btn btn-default" data-toggle="modal" data-target="#modal" v-on="click:setRemoveId"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -122,7 +134,7 @@
         </div>
     </div>
 </div>
-@include('partials._modal')
+@include('partials._modal_delete')
 @section('scripts')
     @parent
     <script src="/js/chart.js"></script>
