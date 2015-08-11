@@ -23,7 +23,6 @@ var vm = new Vue({
         editable:true,
         remove_id:'',
         edit_id:'',
-        current_employee:1,
         columns:[
             {
                 'header':'姓名',
@@ -211,22 +210,6 @@ var vm = new Vue({
                     StarPop.show('操作不成功！请检查网络连接，或重新登录')
                 });
             }
-        },
-       showCard:function(item,e){
-            var popover = $(e.target);
-           popover.attr("data-content",
-               '<div class="list-unstyled">' +
-               '<p>赴哈时间:'+item.reached_at+'</p>' +
-               '<p>护照号码:'+item.passport+'</p>' +
-               '<p>护照期限:'+item.passport_deadline+'</p>' +
-               '<p>签证期限:'+item.visa_deadline+'</p>' +
-               '</div>');
-            popover.popover('show');
-            popover.bind({
-                mouseout:function(){
-                    popover.popover('hide');
-                }
-            });
         },
         setRemoveId:function(e){
             var remove_id = $(e.target).closest("a").attr('data-id');

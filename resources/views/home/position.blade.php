@@ -101,16 +101,7 @@
                     </thead>
                     <tbody>
                     <tr v-repeat="data | filterBy keyword | orderBy sortKey reverse">
-                        <td>
-                            <a data-container="body"
-                               title="人员卡片"
-                               data-html="true"
-                               data-toggle="popover"
-                               class="label label-primary"
-                               href="{{url('employee/show')}}/@{{ id }}"
-                               v-on="mouseover:showCard(this,$event)">@{{ name }}
-                            </a>
-                        </td>
+                        <td><a class="label label-primary" href="{{url('employee/show')}}/@{{ id }}">@{{ name }}</a></td>
                         <td><a class="label label-warning" href="{{url('job/show')}}/@{{ position.id }}">@{{ position.name }}</a></td>
                         <td><a class="label label-success" href="{{url('company/show')}}/@{{ company.id }}">@{{ company.name }}</a></td>
                         <td><a href="{{url('admin/employee')}}/@{{ id }}/edit" class="btn btn-purple {{$btn->showAtLeastEditor()}}">修改</a></td>

@@ -67,17 +67,6 @@ $(function(){
 
     });
 
-    /********************************
-     Chosen Select
-     ********************************/
-
-    /********************************
-     popover
-     ********************************/
-    if( $.isFunction($.fn.popover) ){
-        $('.popover-btn').popover();
-    }
-
 
 
     /********************************
@@ -129,130 +118,133 @@ $(function(){
     }
 
 
-    Chart.defaults.global = {
-        // Boolean - Whether to animate the chart
-        animation: true,
-        // Number - Number of animation steps
-        animationSteps: 60,
+    if(typeof Chart !== "undefined"){
 
-        // String - Animation easing effect
-        // Possible effects are:
-        // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
-        //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
-        //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
-        //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
-        //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
-        //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
-        //  easeOutElastic, easeInCubic]
-        animationEasing: "linear",
+        Chart.defaults.global = {
+            // Boolean - Whether to animate the chart
+            animation: true,
+            // Number - Number of animation steps
+            animationSteps: 60,
 
-        // Boolean - If we should show the scale at all
-        showScale: true,
+            // String - Animation easing effect
+            // Possible effects are:
+            // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+            //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+            //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+            //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+            //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+            //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+            //  easeOutElastic, easeInCubic]
+            animationEasing: "linear",
 
-        // Boolean - If we want to override with a hard coded scale
-        scaleOverride: false,
+            // Boolean - If we should show the scale at all
+            showScale: true,
 
-        // ** Required if scaleOverride is true **
-        // Number - The number of steps in a hard coded scale
-        scaleSteps: null,
-        // Number - The value jump in the hard coded scale
-        scaleStepWidth: null,
-        // Number - The scale starting value
-        scaleStartValue: null,
+            // Boolean - If we want to override with a hard coded scale
+            scaleOverride: false,
 
-        // String - Colour of the scale line
-        scaleLineColor: "rgba(0,0,0,.1)",
+            // ** Required if scaleOverride is true **
+            // Number - The number of steps in a hard coded scale
+            scaleSteps: null,
+            // Number - The value jump in the hard coded scale
+            scaleStepWidth: null,
+            // Number - The scale starting value
+            scaleStartValue: null,
 
-        // Number - Pixel width of the scale line
-        scaleLineWidth: 1,
+            // String - Colour of the scale line
+            scaleLineColor: "rgba(0,0,0,.1)",
 
-        // Boolean - Whether to show labels on the scale
-        scaleShowLabels: true,
+            // Number - Pixel width of the scale line
+            scaleLineWidth: 1,
 
-        // Interpolated JS string - can access value
-        scaleLabel: "<%=value%>",
+            // Boolean - Whether to show labels on the scale
+            scaleShowLabels: true,
 
-        // Boolean - Whether the scale should stick to integers, not floats even if drawing space is there
-        scaleIntegersOnly: true,
+            // Interpolated JS string - can access value
+            scaleLabel: "<%=value%>",
 
-        // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-        scaleBeginAtZero: false,
+            // Boolean - Whether the scale should stick to integers, not floats even if drawing space is there
+            scaleIntegersOnly: true,
 
-        // Number - Scale label font size in pixels
-        scaleFontSize: 12,
+            // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero: false,
 
-        // String - Scale label font weight style
-        scaleFontStyle: "normal",
+            // Number - Scale label font size in pixels
+            scaleFontSize: 12,
 
-        // String - Scale label font colour
-        scaleFontColor: "#666",
+            // String - Scale label font weight style
+            scaleFontStyle: "normal",
 
-        // Boolean - whether or not the chart should be responsive and resize when the browser does.
-        responsive: true,
+            // String - Scale label font colour
+            scaleFontColor: "#666",
 
-        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-        maintainAspectRatio: true,
+            // Boolean - whether or not the chart should be responsive and resize when the browser does.
+            responsive: true,
 
-        // Boolean - Determines whether to draw tooltips on the canvas or not
-        showTooltips: true,
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: true,
 
-        // Function - Determines whether to execute the customTooltips function instead of drawing the built in tooltips (See [Advanced - External Tooltips](#advanced-usage-custom-tooltips))
-        customTooltips: false,
+            // Boolean - Determines whether to draw tooltips on the canvas or not
+            showTooltips: true,
 
-        // Array - Array of string names to attach tooltip events
-        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+            // Function - Determines whether to execute the customTooltips function instead of drawing the built in tooltips (See [Advanced - External Tooltips](#advanced-usage-custom-tooltips))
+            customTooltips: false,
 
-        // String - Tooltip background colour
-        tooltipFillColor: "rgba(0,0,0,0.8)",
+            // Array - Array of string names to attach tooltip events
+            tooltipEvents: ["mousemove", "touchstart", "touchmove"],
 
-
-        // Number - Tooltip label font size in pixels
-        tooltipFontSize: 14,
-
-        // String - Tooltip font weight style
-        tooltipFontStyle: "normal",
-
-        // String - Tooltip label font colour
-        tooltipFontColor: "#fff",
+            // String - Tooltip background colour
+            tooltipFillColor: "rgba(0,0,0,0.8)",
 
 
-        // Number - Tooltip title font size in pixels
-        tooltipTitleFontSize: 14,
+            // Number - Tooltip label font size in pixels
+            tooltipFontSize: 14,
 
-        // String - Tooltip title font weight style
-        tooltipTitleFontStyle: "bold",
+            // String - Tooltip font weight style
+            tooltipFontStyle: "normal",
 
-        // String - Tooltip title font colour
-        tooltipTitleFontColor: "#fff",
+            // String - Tooltip label font colour
+            tooltipFontColor: "#fff",
 
-        // Number - pixel width of padding around tooltip text
-        tooltipYPadding: 6,
 
-        // Number - pixel width of padding around tooltip text
-        tooltipXPadding: 6,
+            // Number - Tooltip title font size in pixels
+            tooltipTitleFontSize: 14,
 
-        // Number - Size of the caret on the tooltip
-        tooltipCaretSize: 8,
+            // String - Tooltip title font weight style
+            tooltipTitleFontStyle: "bold",
 
-        // Number - Pixel radius of the tooltip border
-        tooltipCornerRadius: 6,
+            // String - Tooltip title font colour
+            tooltipTitleFontColor: "#fff",
 
-        // Number - Pixel offset from point x to tooltip edge
-        tooltipXOffset: 10,
+            // Number - pixel width of padding around tooltip text
+            tooltipYPadding: 6,
 
-        // String - Template string for single tooltips
-        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+            // Number - pixel width of padding around tooltip text
+            tooltipXPadding: 6,
 
-        // String - Template string for multiple tooltips
-        multiTooltipTemplate: "<%= value %>",
+            // Number - Size of the caret on the tooltip
+            tooltipCaretSize: 8,
 
-        // Function - Will fire on animation progression.
-        onAnimationProgress: function(){},
+            // Number - Pixel radius of the tooltip border
+            tooltipCornerRadius: 6,
 
-        // Function - Will fire on animation completion.
-        onAnimationComplete: function(){}
-    };
+            // Number - Pixel offset from point x to tooltip edge
+            tooltipXOffset: 10,
 
+            // String - Template string for single tooltips
+            tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+
+            // String - Template string for multiple tooltips
+            multiTooltipTemplate: "<%= value %>",
+
+            // Function - Will fire on animation progression.
+            onAnimationProgress: function(){},
+
+            // Function - Will fire on animation completion.
+            onAnimationComplete: function(){}
+        };
+
+    }
 
 
 
