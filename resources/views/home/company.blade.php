@@ -23,7 +23,7 @@
                                 <div class="input-group" style="display: none" id="updateEle">
                                     <input type="text" class="form-control" id="updateInput" placeholder="请输入内容">
                                           <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" v-on="click:updateLocale()">更新</button>
+                                            <button class="btn btn-primary" type="button" v-on="click:updateCompany()">更新</button>
                                           </span>
                                 </div>
                             <tr v-repeat="company:companies" >

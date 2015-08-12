@@ -103,14 +103,14 @@ var vm = new Vue({
         clearInput:function(){
             this.$$.input.value = '';
         },
-        editPosition:function(position){
-           this.removePosition(position);
+        editCompany:function(company){
+           this.removeCompany(company);
             this.editable = false;
             $('#updateEle').fadeIn();
-            $('#updateInput').val(position.name);
-            this.edit_id = position.id;
+            $('#updateInput').val(company.name);
+            this.edit_id = company.id;
         },
-        updatePosition:function(){
+        updateCompany:function(){
             var input = $('#updateInput').val();
             var data = {
                 name: input
@@ -129,8 +129,8 @@ var vm = new Vue({
         addNew:function(){
             $('#addNewEle').fadeIn();
         },
-        removePosition:function(position){
-            this.positions.$remove(position);
+        removeCompany:function(company){
+            this.companies.$remove(company);
         },
         saveNew:function(){
             var input = {

@@ -184,7 +184,7 @@ class CompanyApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $data = $this->officeRepo->create($input);
+        $data = $this->companyRepo->create($input);
         return $data->id;
     }
 
@@ -239,7 +239,7 @@ class CompanyApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $this->officeRepo->update($input,$id);
+        $this->companyRepo->update($input,$id);
     }
 
     /**
