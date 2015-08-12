@@ -239,3 +239,5 @@ var vm = new Vue({
 
 });
 
+
+//# sourceMappingURL=position.public.js.map

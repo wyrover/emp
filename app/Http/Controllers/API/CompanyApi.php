@@ -19,10 +19,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LocaleApi extends Controller
+class CompanyApi extends Controller
 {
     private  $employeeRepo;
-    private  $officeRepo;
+    private  $companyRepo;
     public function __construct(RepoEmployee $employeeRepo,RepoOffice $officeRepo,RepoPosition $positionRepo,RepoCompany $companyRepo)
     {
         $this->middleware('auth');
@@ -41,29 +41,29 @@ class LocaleApi extends Controller
     {
 
         /**
-         * 获取办公地点数据,并构建json
+         * 获取公司数据,并构建json
          */
-        $offices = $this->officeRepo->all(['id','name']);
-        $office_list = $offices->map(function($item){
+        $companies = $this->companyRepo->all(['id','name']);
+        $company_list = $companies->map(function($item){
             return [
                 'id' => $item->id,
                 'name'=>$item->name,
-                'employee_counts' => $this->employeeRepo->countBy('office_id',$item->id),
+                'employee_counts' => $this->employeeRepo->countBy('company_id',$item->id),
             ];
         });
 
         /**
          * 初始情况读取office数据表中的第一条ID记录
          */
-        $init_id = $offices->lists('id')->first();
+        $init_id = $companies->lists('id')->first();
         /**
          * 获取从客户端传过来的request
          */
-        if (isset($_GET['locale']) && !empty($_GET['locale']))
+        if (isset($_GET['company']) && !empty($_GET['company']))
         {
-            $office_id = $_GET['locale'];
+            $company_id= $_GET['company'];
         }else{
-            $office_id = $init_id;
+            $company_id= $init_id;
         }
         if (isset($_GET['perpage']) && !empty($_GET['perpage']))
         {
@@ -74,15 +74,12 @@ class LocaleApi extends Controller
         }
 
 
-        $query_all = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
+        $query_all = $this->employeeRepo->findByWithRelation('company_id',$company_id,['position','office']);
         $positions = collect($query_all)->map(function($item){
             return $item['position']['name'];
         });
         $position_statistic = array_count_values($positions->toArray());
-        $companies = collect($query_all)->map(function($item){
-            return $item['company']['name'];
-        });
-        $company_statistic = array_count_values($companies->toArray());
+
 
         if($per_page == 'all') {
 
@@ -93,16 +90,15 @@ class LocaleApi extends Controller
                 'last_page'=>1,
                 'from'=>1,
                 'to'=>$query_all->count(),
-                'offices' => $office_list,
+                'companies' => $company_list,
                 'positions' => $position_statistic,
-                'companies' => $company_statistic,
                 'data' => $query_all->toArray()
             ], 200);
 
         }
         else
         {
-            $query = $this->employeeRepo->findByWithRelationPaginate('office_id',$office_id,['position','company'],$per_page);
+            $query = $this->employeeRepo->findByWithRelationPaginate('company_id',$company_id,['position','office'],$per_page);
             $data = \Response::json([
                 'total' => $query->total(),
                 'per_page' => $query->perPage(),
@@ -112,9 +108,8 @@ class LocaleApi extends Controller
                 'prev_page_url' => $query->previousPageUrl(),
                 'from' => $query->firstItem(),
                 'to' => $query->lastItem(),
-                'offices' => $office_list,
+                'companies' => $company_list,
                 'positions' => $position_statistic,
-                'companies' => $company_statistic,
                 'data' => $query->items()
             ], 200);
         }

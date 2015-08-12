@@ -11,8 +11,9 @@ namespace App\Estar\Composers;
      protected $urls = [
          'home'=>['name'=>'人员概况','icon'=>'pie-chart'],
          'employee'=>['name'=>'人员详情','icon'=>'file-text-o'],
-         'locale'=>['name'=>'现场详情','icon'=>'cubes'],
-         'spread'=>['name'=>'人员分布','icon'=>'flag-o'],
+         'locale'=>['name'=>'现场统计','icon'=>'cubes'],
+         'job'=>['name'=>'岗位分析','icon'=>'bar-chart'],
+         'company'=>['name'=>'所属公司','icon'=>'building'],
          'admin'=>[
              'name'=>'系统设置','icon'=>'cogs',
              'submenu'=>[

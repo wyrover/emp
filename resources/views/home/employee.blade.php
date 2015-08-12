@@ -53,8 +53,8 @@
 						<tr v-repeat="data | filterBy keyword | orderBy sortKey reverse">
 							<td class="{{$btn->showAtLeastEditor()}}"><label class="cr-styled"><input name="ids[]" type="checkbox" v-on="click:buttonState()" value=@{{id}}> <i class="fa"></i></label></td>
 							<td><a class="label label-primary" href="{{url('employee/show')}}/@{{ id }}">@{{ name }}</a></td>
-							<td><a class="label label-warning" href="{{url('job/show')}}/@{{ position.id }}">@{{ position.name }}</a></td>
-							<td><a class="label label-success" href="{{url('company/show')}}/@{{ company.id }}">@{{ company.name }}</a></td>
+							<td><a class="label label-warning" href="{{url('job')}}#@{{ position.id }}">@{{ position.name }}</a></td>
+							<td><a class="label label-success" href="{{url('company')}}#@{{ company.id }}">@{{ company.name }}</a></td>
 							<td><a class="label label-info" href="{{url('locale')}}#@{{ office.id }}">@{{ office.name }}</a></td>
 							<td>@{{passport}}</td>
 							<td class="visible-lg">@{{passport_deadline}}</td>

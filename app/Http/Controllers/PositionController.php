@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LocaleController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class LocaleController extends Controller
     }
     public function index()
     {
-        return view('home.locale');
+        return view('home.position');
     }
 
 }

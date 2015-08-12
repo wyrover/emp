@@ -19,7 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LocaleApi extends Controller
+class PositionApi extends Controller
 {
     private  $employeeRepo;
     private  $officeRepo;
@@ -41,29 +41,29 @@ class LocaleApi extends Controller
     {
 
         /**
-         * 获取办公地点数据,并构建json
+         * 获取岗位数据,并构建json
          */
-        $offices = $this->officeRepo->all(['id','name']);
-        $office_list = $offices->map(function($item){
+        $positions = $this->positionRepo->all(['id','name']);
+        $position_list = $positions->map(function($item){
             return [
                 'id' => $item->id,
                 'name'=>$item->name,
-                'employee_counts' => $this->employeeRepo->countBy('office_id',$item->id),
+                'employee_counts' => $this->employeeRepo->countBy('position_id',$item->id),
             ];
         });
 
         /**
          * 初始情况读取office数据表中的第一条ID记录
          */
-        $init_id = $offices->lists('id')->first();
+        $init_id = $positions->lists('id')->first();
         /**
          * 获取从客户端传过来的request
          */
-        if (isset($_GET['locale']) && !empty($_GET['locale']))
+        if (isset($_GET['job']) && !empty($_GET['job']))
         {
-            $office_id = $_GET['locale'];
+            $position_id = $_GET['job'];
         }else{
-            $office_id = $init_id;
+            $position_id = $init_id;
         }
         if (isset($_GET['perpage']) && !empty($_GET['perpage']))
         {
@@ -74,11 +74,11 @@ class LocaleApi extends Controller
         }
 
 
-        $query_all = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
-        $positions = collect($query_all)->map(function($item){
-            return $item['position']['name'];
+        $query_all = $this->employeeRepo->findByWithRelation('position_id',$position_id,['office','company']);
+        $offices = collect($query_all)->map(function($item){
+            return $item['office']['name'];
         });
-        $position_statistic = array_count_values($positions->toArray());
+        $office_statistic = array_count_values($offices->toArray());
         $companies = collect($query_all)->map(function($item){
             return $item['company']['name'];
         });
@@ -93,8 +93,8 @@ class LocaleApi extends Controller
                 'last_page'=>1,
                 'from'=>1,
                 'to'=>$query_all->count(),
-                'offices' => $office_list,
-                'positions' => $position_statistic,
+                'positions' => $position_list,
+                'offices' => $office_statistic,
                 'companies' => $company_statistic,
                 'data' => $query_all->toArray()
             ], 200);
@@ -102,7 +102,7 @@ class LocaleApi extends Controller
         }
         else
         {
-            $query = $this->employeeRepo->findByWithRelationPaginate('office_id',$office_id,['position','company'],$per_page);
+            $query = $this->employeeRepo->findByWithRelationPaginate('position_id',$position_id,['office','company'],$per_page);
             $data = \Response::json([
                 'total' => $query->total(),
                 'per_page' => $query->perPage(),
@@ -112,8 +112,8 @@ class LocaleApi extends Controller
                 'prev_page_url' => $query->previousPageUrl(),
                 'from' => $query->firstItem(),
                 'to' => $query->lastItem(),
-                'offices' => $office_list,
-                'positions' => $position_statistic,
+                'positions' => $position_list,
+                'offices' => $office_statistic,
                 'companies' => $company_statistic,
                 'data' => $query->items()
             ], 200);
@@ -189,7 +189,7 @@ class LocaleApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $data = $this->officeRepo->create($input);
+        $data = $this->positionRepo->create($input);
         return $data->id;
     }
 
@@ -230,7 +230,16 @@ class LocaleApi extends Controller
         return $data;
     }
 
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -244,7 +253,7 @@ class LocaleApi extends Controller
             return '权限不够';
         }
         $input = \Request::all();
-        $this->officeRepo->update($input,$id);
+        $this->positionRepo->update($input,$id);
     }
 
     /**
@@ -259,7 +268,7 @@ class LocaleApi extends Controller
             return '权限不够';
         }
 
-            $this->officeRepo->delete($id);
+            $this->positionRepo->delete($id);
 
 
     }

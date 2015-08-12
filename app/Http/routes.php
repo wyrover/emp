@@ -23,6 +23,8 @@ Route::group(['prefix'=>'api/v1'],function(){
 
 	Route::resource('employee','API\EmployeeApi');
 	Route::resource('locale','API\LocaleApi');
+	Route::resource('job','API\PositionApi');
+	Route::resource('company','API\CompanyApi');
 	Route::get('home','API\HomeApi@index');
 	Route::post('pinyin','API\Pinyin@index');
 });
@@ -44,6 +46,8 @@ Route::get('employee/show/{id}','EmployeeController@show');
 
 //Route::get('spread','SpreadController@index');
 Route::get('locale','LocaleController@index');
+Route::get('job','PositionController@index');
+Route::get('company','CompanyController@index');
 
 
 Route::get('/',function(){

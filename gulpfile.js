@@ -30,6 +30,8 @@ elixir(function(mix) {
         .scripts("home.js","public/js/home.js")
         .scripts("employee.public.js","public/js/employee.public.js")
         .scripts("locale.public.js","public/js/locale.public.js")
+        .scripts("position.public.js","public/js/position.public.js")
+        .scripts("company.public.js","public/js/company.public.js")
         .scripts("employee.show.js","public/js/employee.show.js")
         .scripts("employee.create.js","public/js/employee.create.js")
         .scripts("employee.update.js","public/js/employee.update.js")

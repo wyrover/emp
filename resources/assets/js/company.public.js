@@ -5,7 +5,7 @@ var id = window.location.href.split('#')[1];
 if( typeof id === 'undefined'){
     id = 1;
 }
-var api = 'http://'+window.location.host + '/api/v1/job/';
+var api = 'http://'+window.location.host + '/api/v1/company/';
 var vm = new Vue({
     el: "#app",
     data: {
@@ -16,9 +16,9 @@ var vm = new Vue({
         pagersCount:5,//显示的pager数量
         perpage:15,
         disabled:true,
-        current_position:id,
+        current_company:id,
         newLocale:'',
-        offices:[],
+        companies:[],
         editable:true,
         remove_id:'',
         edit_id:'',
@@ -29,17 +29,17 @@ var vm = new Vue({
                 'class':''
             },
             {
-                'header':'所在现场',
+                'header':'岗位',
                 'class':''
             },
             {
-                'header':'单位',
+                'header':'所在现场',
                 'class':''
             }
 
         ],
         ids:[
-            "pinyin","office_id","company_id"
+            "pinyin","position_id","office_id"
         ]
     },
 
@@ -61,11 +61,11 @@ var vm = new Vue({
         //从API获取相应数据
         getData: function(page){
             addLoading();
-            this.$http.get(baseURL+"/api/v1/job?job=" + this.current_position + "&page=" + page +"&perpage="+this.perpage,function(data){
+            this.$http.get(baseURL+"/api/v1/company?company=" + this.current_company + "&page=" + page +"&perpage="+this.perpage,function(data){
                 this.$set("user_level",data["user_level"]);
-                this.$set("offices",data["offices"]);
-                this.$set("positions",data["positions"]);
                 this.$set("companies",data["companies"]);
+                this.$set("positions",data["positions"]);
+                this.$set("offices",data["offices"]);
                 this.$set("data",data["data"]);
                 this.$set("total",data["total"]);
                 this.$set("from",data["from"]);
@@ -80,8 +80,8 @@ var vm = new Vue({
             });
         },
 
-        changePosition:function(e){
-            this.current_position = e.target.id;
+        changeCompany:function(e){
+            this.current_company = e.target.id;
             this.getData();
         },
 

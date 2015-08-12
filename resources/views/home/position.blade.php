@@ -3,8 +3,10 @@
     @inject('btn','App\Estar\Composers\Estar')
 <div class="row">
     <div class="col-sm-4">
+        <button class="btn btn-purple btn-block">当前列表:@{{ positions[parseInt(this.current_position)-1].name }}  <i class="fa fa-mail-forward"></i></button>
+        <hr class="clean">
         <div class="panel panel-default">
-            <div class="panel-heading clean">现场列表
+            <div class="panel-heading clean">岗位列表
                 <span class="pull-right"><button type="button" class="btn btn-danger btn-xs" v-on="click:addNew"><i class="fa fa-plus"></i> 添加数据</button></span>
             </div>
             <div class="panel-body nopadd">
@@ -21,17 +23,17 @@
                                 <div class="input-group" style="display: none" id="updateEle">
                                     <input type="text" class="form-control" id="updateInput" placeholder="请输入内容">
                                           <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" v-on="click:updateLocale()">更新</button>
+                                            <button class="btn btn-primary" type="button" v-on="click:updatePosition()">更新</button>
                                           </span>
                                 </div>
-                            <tr v-repeat="office:offices" >
-                                <td><a id="@{{ office.id }}"  v-class="on:id==current_office" class="label label-success" v-on="click:changeLocale"  href="javascript:void (0)">@{{ office.name }}</a>
+                            <tr v-repeat="position:positions" >
+                                <td><a id="@{{ position.id }}"  v-class="on:id==current_position" class="label label-success" v-on="click:changePosition"  href="javascript:void (0)">@{{ position.name }}</a>
                                 </td>
-                                <td><span class="badge bg-gray text-white">@{{ office.employee_counts }}人</span></td>
+                                <td><span class="badge bg-gray text-white">@{{ position.employee_counts }}人</span></td>
                                 <td  class="{{$btn->showAtLeastEditor()}}">
                                     <div class="btn-group btn-group-xs pull-right">
-                                        <a data-id ="@{{ office.id }}" class="btn btn-default" v-class="disabled:editable==false" v-on="click:editLocale(office)"><i class="fa fa-edit"></i></a>
-                                        <a  data-id ="@{{ office.id }}"  class="btn btn-default" data-toggle="modal" data-target="#modal" v-on="click:setRemoveId"><i class="fa fa-trash"></i></a>
+                                        <a data-id ="@{{ position.id }}" class="btn btn-default" v-class="disabled:editable==false" v-on="click:editPosition(position)"><i class="fa fa-edit"></i></a>
+                                        <a  data-id ="@{{ position.id }}"  class="btn btn-default" data-toggle="modal" data-target="#modal" v-on="click:setRemoveId"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -40,23 +42,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading clean">
-                统计数据： @{{ offices[parseInt(this.current_office)-1].name }}
-                <div class="btn-group pull-right">
-                    <select class="form-control" v-model="currentChart" v-on="change:changeChart(currentChart)">
-                        <option value="positions">按岗位</option>
-                        <option value="companies">按公司</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="panel-body" id="chartBox" >
-                <canvas id="myChart"></canvas>
-            </div>
-            <ul class="list-unstyled"  id="legend"></ul>
-
         </div>
     </div>
     <div class="col-sm-8">
@@ -101,9 +86,18 @@
                     </thead>
                     <tbody>
                     <tr v-repeat="data | filterBy keyword | orderBy sortKey reverse">
-                        <td><a class="label label-primary" href="{{url('employee/show')}}/@{{ id }}">@{{ name }}</a></td>
-                        <td><a class="label label-warning" href="{{url('job/show')}}/@{{ position.id }}">@{{ position.name }}</a></td>
-                        <td><a class="label label-success" href="{{url('company/show')}}/@{{ company.id }}">@{{ company.name }}</a></td>
+                        <td>
+                            <a data-container="body"
+                               title="人员卡片"
+                               data-html="true"
+                               data-toggle="popover"
+                               class="label label-primary"
+                               href="{{url('employee/show')}}/@{{ id }}"
+                               v-on="mouseover:showCard(this,$event)">@{{ name }}
+                            </a>
+                        </td>
+                        <td><a class="label label-warning" href="{{url('locale#')}}@{{ office.id }}">@{{ office.name }}</a></td>
+                        <td><a class="label label-success" href="{{url('company#')}}@{{ company.id }}">@{{ company.name }}</a></td>
                         <td><a href="{{url('admin/employee')}}/@{{ id }}/edit" class="btn btn-purple {{$btn->showAtLeastEditor()}}">修改</a></td>
                         <td style="display: none">@{{pinyin}}</td>
                     </tr>
@@ -138,6 +132,6 @@
 @section('scripts')
     @parent
     <script src="/js/chart.js"></script>
-    <script src="/js/locale.public.js"></script>
+    <script src="/js/position.public.js"></script>
 @stop
 @stop
