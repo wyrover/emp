@@ -254,7 +254,7 @@ class CompanyApi extends Controller
             return '权限不够';
         }
 
-            $this->officeRepo->delete($id);
+            $this->companyRepo->delete($id);
 
 
     }

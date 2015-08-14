@@ -3,7 +3,7 @@
     @inject('btn','App\Estar\Composers\Estar')
 <div class="row">
     <div class="col-sm-4">
-        <button class="btn btn-purple btn-block">当前列表:@{{ offices[parseInt(this.current_office)-1].name }}  <i class="fa fa-mail-forward"></i></button>
+        <button class="btn btn-purple btn-block">当前列表: @{{ offices[parseInt(this.current_office)-1].name }}  <i class="fa fa-map-marker"></i></button>
         <hr class="clean">
         <div class="panel panel-default">
             <div class="panel-heading clean">现场列表
