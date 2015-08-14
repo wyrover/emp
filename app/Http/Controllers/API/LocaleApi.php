@@ -76,10 +76,16 @@ class LocaleApi extends Controller
 
         $query_all = $this->employeeRepo->findByWithRelation('office_id',$office_id,['position','company']);
         $positions = collect($query_all)->map(function($item){
+            if($item['position']['name'] == null){
+                return '无';
+            }
             return $item['position']['name'];
         });
         $position_statistic = array_count_values($positions->toArray());
         $companies = collect($query_all)->map(function($item){
+            if($item['company']['name'] == null){
+                return '无';
+            }
             return $item['company']['name'];
         });
         $company_statistic = array_count_values($companies->toArray());

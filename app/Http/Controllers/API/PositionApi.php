@@ -76,10 +76,16 @@ class PositionApi extends Controller
 
         $query_all = $this->employeeRepo->findByWithRelation('position_id',$position_id,['office','company']);
         $offices = collect($query_all)->map(function($item){
+            if ($item['office']['name'] == null) {
+                return '无';
+            };
             return $item['office']['name'];
         });
         $office_statistic = array_count_values($offices->toArray());
         $companies = collect($query_all)->map(function($item){
+            if ($item['company']['name'] == null) {
+                return '无';
+            };
             return $item['company']['name'];
         });
         $company_statistic = array_count_values($companies->toArray());
