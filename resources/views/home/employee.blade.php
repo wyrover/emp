@@ -17,7 +17,11 @@
 								<option value="all">全部</option>
 							</select>
 						</div>
+                        <div class="btn-group">
+                            <a href="{{url('export/employee')}}" class="btn btn-default tooltip-btn" data-placement="top" data-original-title="导出Excel"  type="button"><span class="fa fa-file-excel-o"></span></a>
+                        </div>
 					</div>
+
 				</div>
 				<div class="col-xs-6">
 					<div class="form-inline pull-right">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Employee;
+use App\Estar\Excel\TableExport;
 use App\Office;
 use App\Position;
 use App\Company;
@@ -165,15 +166,34 @@ class EmployeeApi extends Controller
         return $data;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
+    public function export()
     {
-        //
+        $query =  $this->employeeRepo->allWithRelation(['position','company','office','visaType','visaHandle']);
+        $data = $query->map(function($item){
+            return[
+                '姓名'=>$item->name,
+                '岗位'=>$item->position['name'],
+                '人员归属'=>$item->company['name'],
+                '所在地'=>$item->office['name'],
+                '护照号'=>$item->passport,
+                '发照日期'=>$item->passport_date,
+                '护照有效期'=>$item->passport_deadline,
+                '签证类型'=>$item->visaType['type'],
+                '签证期限'=>$item->visa_deadline,
+                '落地签期限'=>$item->land_deadline,
+                '签证或落地签办理预案'=>$item->visaHandle['method'],
+                '赴哈时间'=>$item->reached_at,
+            ];
+        });
+
+        \Excel::create('EstarTable',function($excel) use($data){
+            $excel->setTitle("iStar Office")
+                        ->setCreator('iStar Office');
+            $excel->sheet('人员统计表',function($sheet) use($data){
+                $sheet->setAutoSize(true);
+                $sheet->fromArray($data);
+            });
+        })->download('xls');
     }
 
     /**

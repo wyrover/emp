@@ -50,6 +50,10 @@ Route::get('job','PositionController@index');
 Route::get('company','CompanyController@index');
 
 
+//EXPORT TABLE AS EXCEL
+Route::get('export/employee','API\EmployeeApi@export');
+
+
 Route::get('/',function(){
 	return Redirect::to('home');
 });
