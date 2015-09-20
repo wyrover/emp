@@ -17,11 +17,8 @@ namespace App\Estar\Composers;
          'admin'=>[
              'name'=>'系统设置','icon'=>'cogs',
              'submenu'=>[
-                 'admin/employee'=>'人员管理',
-                 'admin/position'=>'岗位管理',
-                 'admin/company'=>'所属公司管理',
-                 'admin/locale'=>'所在位置管理',
-                 'admin/visa'=>'签证管理'
+                 'admin/employee'=>'签证预案',
+                 'admin/visa'=>'签证类型'
              ]
          ]
      ];
